@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Administration Page</title>
+  <link rel="stylesheet" href="../css/administration.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <meta charset="UTF-8">
+</head>
+<body>
+  <nav>
+    <ul class="menu">
+      <li><a href="index.html">Αρχική Σελίδα</a></li>
+      <li><a href="company.html">Προφίλ Εταιρίας</a></li>
+      <li><a href="calculate.html">Υπολογισμός Κόστους Φυσικού Αερίου</a></li>
+      <li><a href="contact.html">Επικοινωνία</a></li>
+      <li><a href="administration.html">Σελίδα Διαχείρισης</a></li>
+    </ul>
+    <div class="mobile-menu-icon">
+      <img src="path/to/menu-icon.png" alt="Menu Icon">
+    </div>
+  </nav>
+  <h2>Σελίδα Διαχείρισης</h2>
+
+  <form id="login-form">
+    <input type="text" id="username" name="username" placeholder="Όνομα χρήστη" required>
+    <input type="password" id="password" name="password" placeholder="Κωδικός πρόσβασης" required>
+    <button type="submit">Σύνδεση Διαχειριστή</button>
+  </form>
+  <table id="request-table" style="display: none;">
+    <thead>
+      <tr>
+        <th>Όνομα</th>
+        <th>Τηλέφωνο</th>
+        <th>Τμήμα</th>
+        <th>Email</th>
+        <th>Θέμα</th>
+        <th>Μήνυμα</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  
+      const urlParams = new URLSearchParams(window.location.search);
+      const username = urlParams.get('username');
+      const password = urlParams.get('password');
+  
+      document.getElementById('username').value = username;
+      document.getElementById('password').value = password;
+  
+      document.getElementById('login-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+  
+        var enteredUsername = document.getElementById('username').value;
+        var enteredPassword = document.getElementById('password').value;
+  
+        if (enteredUsername === 'admin' && enteredPassword === 'Root123') {
+          document.getElementById('login-form').style.display = 'none';
+          document.getElementById('request-table').style.display = 'table';
+  
+          
+          var xhr = new XMLHttpRequest();
+          xhr.open('POST', '../php/fetch_requests.php', true);
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+              document.getElementById('request-table').getElementsByTagName('tbody')[0].innerHTML = xhr.responseText;
+            } else if (xhr.readyState === XMLHttpRequest.DONE && xhr.status !== 200) {
+              alert('Αποτυχία φόρτωσης αιτήσεων. Προσπαθήστε ξανά.');
+            }
+          };
+          xhr.send();
+        } else {
+          alert('Λυπούμαστε δεν είστε διαχειριστής της διαδικτυακής εφαρμογής.  ');
+        }
+      });
+    });
+  </script>
+  
+</body>
+</html>

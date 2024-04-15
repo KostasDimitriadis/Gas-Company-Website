@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Cost of Natural Gas Calculation</title>
+  <link rel="stylesheet" href="../css/calculate.css">
+  <link rel="stylesheet" href="../css/global.css">
+  <meta charset="UTF-8">
+</head>
+<style>
+   .footer-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 20px;
+  background-color: blue;
+  color: white;
+  justify-items: center; 
+}
+</style>
+<body>
+  <nav>
+    <ul class="menu">
+      <li><a href="index.html">Αρχική Σελίδα</a></li>
+      <li><a href="company.html">Προφίλ Εταιρίας</a></li>
+      <li><a href="calculate.html">Υπολογισμός Κόστους Φυσικού Αερίου</a></li>
+      <li><a href="contact.html">Επικοινωνία</a></li>
+      <li><a href="administration.html">Σελίδα Διαχείρισης</a></li>
+    </ul>
+    <div class="mobile-menu-icon">
+      <img src="path/to/menu-icon.png" alt="Menu Icon">
+    </div>
+  </nav>
+  <form id="cost-calculation-form">
+    <h2>Υπολογισμός Κόστους Φυσικού Αερίου</h2>
+    <div class="form-group">
+      <label for="consumption">Συνολικές Κιλοβατώρες (kWh):</label>
+      <input type="number" id="consumption" name="consumption" required>
+    </div>
+    <div class="form-group">
+      <label for="square-meters">Συνολικά τετραγωνικά του οικήματος(m<sup>2</sup>):</label>
+      <input type="number" id="square-meters" name="square-meters" required>
+    </div>
+    <div class="form-group">
+      <label for="days">Πλήθος ημερών:</label>
+      <input type="number" id="days" name="days" required>
+    </div>
+    <button type="submit">Υπολόγισε</button>
+  </form>
+
+  <div id="result"></div>
+
+<br><br>
+<footer>
+  <div class="footer-grid">
+    <div class="footer-column">
+      <h4>Επικοινωνία</h4>
+      <p>Τηλέφωνο: <a href="tel:210 4142000">210 4142000</a></p>
+      <p>Email: <a href="mail: kdimitriadis2121@gmail.com"> kdimitriadis2121@gmail.com</a></p>
+      <p>© 2023 DIMITRIADIS. All rights reserved.</p>
+    </div>
+    <div class="footer-column">
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps?q=University+of+Piraeus&output=embed" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <script>
+    document.getElementById('cost-calculation-form').addEventListener('submit', function(event) {
+      event.preventDefault(); 
+
+      
+      var consumption = parseFloat(document.getElementById('consumption').value);
+      var squareMeters = parseFloat(document.getElementById('square-meters').value);
+      var days = parseFloat(document.getElementById('days').value);
+
+      
+      var municipalityCharges = getMunicipalityCharge(squareMeters);
+      var utilityCharges = getUtilityCharge(consumption);
+      var municipalityCost = squareMeters * municipalityCharges * (days / 365);
+      var utilityCost = consumption * utilityCharges * (days / 365);
+      var totalCharges = consumption * getEnergyBill(consumption);
+      var finalBillingAmount = municipalityCost + utilityCost + totalCharges;
+
+   
+      var resultElement = document.getElementById('result');
+      resultElement.textContent = 'Τελικό Κόστος Χρέωσης: ' + finalBillingAmount.toFixed(2) + ' €';
+    });
+
+    function getMunicipalityCharge(squareMeters) {
+      if (squareMeters <= 50) {
+        return 0.12;
+      } else if (squareMeters <= 90) {
+        return 0.20;
+      } else {
+        return 0.31;
+      }
+    }
+
+    function getUtilityCharge(consumption) {
+      if (consumption <= 1600) {
+        return 0.01315;
+      } else if (consumption <= 2000) {
+        return 0.01480;
+      } else {
+        return 0.01625;
+      }
+    }
+
+    function getEnergyBill(consumption) {
+      if (consumption <= 1600) {
+        return 0.00623;
+      } else if (consumption <= 2000) {
+        return 0.00768;
+      } else {
+        return 0.00915;
+      }
+    }
+  </script>
+</body>
+</html>

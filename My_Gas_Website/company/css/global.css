@@ -1,0 +1,26 @@
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+    background-color: blue;
+    color: white; 
+ 
+  }
+  
+  .footer-column a {
+    color: white !important;
+    font-size: 18px;
+    text-decoration: none;
+  }
+  
+  
+  .footer-column a:hover {
+    text-decoration: underline;
+  }
+  
+ 
+  @media (max-width: 768px) {
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+  }

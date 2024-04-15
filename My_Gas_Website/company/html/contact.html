@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Communication Interface</title>
+  <link rel="stylesheet" href="../css/contact.css">
+  <meta charset="UTF-8">
+</head>
+<body>
+  <nav>
+    <ul class="menu">
+      <li><a href="index.html"> Αρχική Σελίδα</a></li>
+      <li><a href="company.html">Προφίλ Εταιρίας</a></li>
+      <li><a href="calculate.html">Υπολογισμός Κόστους Φυσικού Αερίου </a></li>
+      <li><a href="contact.html"> Επικοινωνία </a></li>
+      <li><a href="administration.html">Σελίδα Διαχείρισης </a></li>
+    </ul>
+    <div class="mobile-menu-icon">
+      <img src="path/to/menu-icon.png" alt="Menu Icon">
+    </div>
+  </nav>
+  <div id="contact-form">
+    <h2>Επικοινωνήστε μαζί μας</h2>
+    <form action="../php/contact.php" method="POST">
+      <div class="form-group">
+        <label for="name">Όνομα:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="telephone">Τηλέφωνο:</label>
+        <input type="tel" id="telephone" name="telephone" required>
+      </div>
+      <div class="form-group">
+        <label for="department">Αρμόδιο τμήμα:</label>
+        <select id="department" name="department" required>
+          <option value="" selected disabled>Διαλέξτε τμήμα</option>
+          <option value="Τμήμα Υποστήριξης">Τμήμα Υποστήριξης</option>
+          <option value="Τμήμα Πωλήσεων">Τμήμα Πωλήσεων</option>
+          <option value="Τμήμα Βλαβών">Τμήμα Βλαβών</option>
+          <option value="Λογιστήριο">Λογιστήριο</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="subject">Θέμα:</label>
+        <input type="text" id="subject" name="subject" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Μήνυμα:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+      <button type="submit">Υπέβαλλε</button>
+    </form>
+  </div>
+
+  <div id="company-info">
+    <h2>Στοιχεία επικοινωνίας της εταιρίας</h2>
+    <p>Διεύθυνση: Καραολή και Δημητρίου 80, Πειραιάς 185 34</p>
+    <p>Τηλεφωνικό Κέντρο: <a href="tel:210 4142000">210 4142000</a></p>
+    <p>Email: <a href="kdimitriadis2121@gmail.com">kdimitriadis2121@gmail.com</a></p>
+  </div>
+
+  <div id="google-maps">
+    <iframe src="https://www.google.com/maps?q=University+of+Piraeus&output=embed"></iframe>
+  </div>
+  
+</body>
+</html>
